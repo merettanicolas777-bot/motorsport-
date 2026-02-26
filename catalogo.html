@@ -106,6 +106,120 @@ function filterProducts() {
             menuLinks.classList.toggle('active');
         });
     </script>
+    <script>
+    (function(){
+      var key='cartItems';
+      function load(){try{return JSON.parse(localStorage.getItem(key)||'[]')}catch(e){return []}}
+      function save(list){localStorage.setItem(key,JSON.stringify(list))}
+      function format(n){return '$'+n.toLocaleString('es-AR')}
+      function total(){var t=0;load().forEach(function(p){t+=p.price*p.qty});return t}
+      function count(){var c=0;load().forEach(function(p){c+=p.qty});return c}
+      function ensureUI(){
+        if(document.getElementById('cartPanel')) return;
+        var nav=document.querySelector('.navbar');
+        var btn=document.createElement('button');
+        btn.className='cart-btn';
+        btn.id='cartToggle';
+        btn.innerHTML='Carrito <span id="cartCount" class="cart-count">0</span>';
+        if(nav){
+          var burger=document.getElementById('mobile-menu');
+          if(burger){ nav.insertBefore(btn, burger); } else { nav.appendChild(btn); }
+        }
+        var panel=document.createElement('div');
+        panel.className='cart-panel';
+        panel.id='cartPanel';
+        panel.innerHTML='<div class="cart-header"><div>Tu Carrito</div><button id="cartClose" class="cart-btn">Cerrar</button></div><div class="cart-items" id="cartItems"></div><div class="cart-footer"><div class="cart-total"><span>Total</span><span id="cartTotal">$0</span></div><button id="checkoutBtn" class="btn-buy">Finalizar por WhatsApp</button></div>';
+        document.body.appendChild(panel);
+      }
+      function updateBadge(){var el=document.getElementById('cartCount');if(el) el.textContent=count()}
+      function render(){
+        var box=document.getElementById('cartItems');if(!box) return;
+        var list=load();box.innerHTML='';
+        if(!list.length){updateTotals();updateBadge();return}
+        list.forEach(function(p){
+          var row=document.createElement('div');
+          row.className='cart-item';
+          row.innerHTML='<div><div class="cart-item-title">'+p.name+'</div><div>'+format(p.price)+' x '+p.qty+'</div></div><div class="qty"><button data-act="dec" data-name="'+p.name+'">-</button><span>'+p.qty+'</span><button data-act="inc" data-name="'+p.name+'">+</button><button data-act="del" data-name="'+p.name+'">x</button></div>';
+          box.appendChild(row);
+        });
+        updateTotals();updateBadge();
+      }
+      function updateTotals(){var t=document.getElementById('cartTotal');if(t) t.textContent=format(total())}
+      function addItem(prod){
+        var list=load();
+        var found=list.find(function(x){return x.name===prod.name});
+        if(found){found.qty+=prod.qty||1}else{list.push({name:prod.name,price:prod.price,img:prod.img||'',qty:prod.qty||1})}
+        save(list);render();
+      }
+      function changeQty(name,delta){
+        var list=load();
+        for(var i=0;i<list.length;i++){
+          if(list[i].name===name){list[i].qty+=delta;if(list[i].qty<=0){list.splice(i,1)}break;}
+        }
+        save(list);render();
+      }
+      function removeItem(name){
+        save(load().filter(function(p){return p.name!==name}));render();
+      }
+      function extractImg(el){
+        var img=el.querySelector('.product-img');
+        if(!img) return '';
+        var s=img.getAttribute('style')||'';
+        var m=s.match(/url\\(['"]?(.*?)['"]?\\)/);
+        return m?m[1]:'';
+      }
+      function injectButtons(){
+        var cards=document.querySelectorAll('.product-card');
+        cards.forEach(function(card){
+          if(card.querySelector('.add-to-cart')) return;
+          var info=card.querySelector('.product-info'); if(!info) return;
+          var nameEl=info.querySelector('h3'); if(!nameEl) return;
+          var priceEl=info.querySelector('.price'); if(!priceEl) return;
+          var name=nameEl.innerText.trim();
+          var priceText=priceEl.innerText.replace(/[^0-9]/g,''); var price=parseInt(priceText||'0',10)||0;
+          var img=extractImg(card);
+          var btn=document.createElement('button');
+          btn.className='btn-buy add-to-cart';
+          btn.setAttribute('data-name',name);
+          btn.setAttribute('data-price',String(price));
+          btn.setAttribute('data-img',img);
+          btn.textContent='Agregar al carrito';
+          info.appendChild(btn);
+        });
+      }
+      function openCart(){var p=document.getElementById('cartPanel');if(p) p.classList.add('open')}
+      function closeCart(){var p=document.getElementById('cartPanel');if(p) p.classList.remove('open')}
+      function checkout(){
+        var list=load(); if(!list.length){openCart();return}
+        var lines=['Hola MotorSport! Quiero comprar estos productos:',''];
+        list.forEach(function(p,i){lines.push((i+1)+') '+p.name+' x'+p.qty+' - '+format(p.price*p.qty))});
+        lines.push(''); lines.push('Total: '+format(total()));
+        var url='https://wa.me/5493624894294?text='+encodeURIComponent(lines.join('\\n'));
+        window.open(url,'_blank');
+      }
+      document.addEventListener('click',function(e){
+        var t=e.target;
+        if(t.id==='cartToggle'){e.preventDefault();openCart();return}
+        if(t.id==='cartClose'){e.preventDefault();closeCart();return}
+        if(t.id==='checkoutBtn'){e.preventDefault();checkout();return}
+        if(t.classList && t.classList.contains('add-to-cart')){
+          var name=t.getAttribute('data-name');
+          var price=parseInt(t.getAttribute('data-price')||'0',10);
+          var img=t.getAttribute('data-img')||'';
+          addItem({name:name,price:price,img:img,qty:1});
+          return;
+        }
+        if(t.dataset && t.dataset.act){
+          var act=t.dataset.act, name2=t.dataset.name;
+          if(act==='inc') changeQty(name2,1);
+          else if(act==='dec') changeQty(name2,-1);
+          else if(act==='del') removeItem(name2);
+          return;
+        }
+      });
+      document.addEventListener('DOMContentLoaded',function(){ensureUI();injectButtons();render()});
+    })();
+    </script>
 </body>
 </html>
   <section class="container">
@@ -163,61 +277,22 @@ function filterProducts() {
                 VER DETALLES
             </a>
     </div>
+    
 
     </div>
     <div class="product-card">
         <a href="cera.html" style="display: block; cursor: pointer;">
-            <div class="product-img" style="background-image: url('img/d0d3981f-6393-4c05-b743-b88d5f926af4.jpg');"></div>
+            <div class="product-img" style="background-image: url('img/cc0043ac-223f-4df5-b6d7-978061de47e0.jpg');"></div>
         </a>
         <div class="product-info">
-            <h3>Cera BLEND Paste Wax</h3>
-            <span class="price">$32.500</span>
-            <a href="cera.html" class="btn-buy" style="display: block; text-align: center; text-decoration: none;">
+            <h3>Cera lol</h3>
+            <span class="price">$55.9544343</span>
+            <a href="cera2.html" class="btn-buy" style="display: block; text-align: center; text-decoration: none;">
                 VER DETALLES
             </a>
     </div>
 
-    </div>
-    <div class="product-card">
-        <a href="cera.html" style="display: block; cursor: pointer;">
-            <div class="product-img" style="background-image: url('img/d0d3981f-6393-4c05-b743-b88d5f926af4.jpg');"></div>
-        </a>
-        <div class="product-info">
-            <h3>Cera BLEND Paste Wax</h3>
-            <span class="price">$32.500</span>
-            <a href="cera.html" class="btn-buy" style="display: block; text-align: center; text-decoration: none;">
-                VER DETALLES
-            </a>
-    </div>
-
-
-    </div>
-    <div class="product-card">
-        <a href="cera.html" style="display: block; cursor: pointer;">
-            <div class="product-img" style="background-image: url('img/d0d3981f-6393-4c05-b743-b88d5f926af4.jpg');"></div>
-        </a>
-        <div class="product-info">
-            <h3>Cera BLEND Paste Wax</h3>
-            <span class="price">$32.500</span>
-            <a href="cera.html" class="btn-buy" style="display: block; text-align: center; text-decoration: none;">
-                VER DETALLES
-            </a>
-    </div>
-
-
-    </div>
-    <div class="product-card">
-        <a href="cera.html" style="display: block; cursor: pointer;">
-            <div class="product-img" style="background-image: url('img/d0d3981f-6393-4c05-b743-b88d5f926af4.jpg');"></div>
-        </a>
-        <div class="product-info">
-            <h3>Cera BLEND Paste Wax</h3>
-            <span class="price">$32.500</span>
-            <a href="cera.html" class="btn-buy" style="display: block; text-align: center; text-decoration: none;">
-                VER DETALLES
-            </a>
-    </div>
-
+    
 
 
 

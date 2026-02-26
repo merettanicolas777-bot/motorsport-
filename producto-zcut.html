@@ -64,6 +64,7 @@
                 <a href="https://wa.me/5493624894294?text=Hola%20MotorSport!%20Vengo%20de%20la%20web,%20quiero%20comprar%20el%20Zacs%20Z%20Cut%20Fast" target="_blank" class="btn-buy" style="display: block; text-align: center; text-decoration: none; font-size: 1.2rem; padding: 15px;">
                     COMPRAR AHORA EN WHATSAPP
                 </a>
+                <button id="addToCartBtn" class="btn-buy" style="display: block; text-align: center; text-decoration: none; font-size: 1.2rem; padding: 15px; margin-top:10px;">AGREGAR AL CARRITO</button>
                 <br>
                 <a href="catalogo.html" style="color: #888; text-decoration: none;">← Volver al catálogo</a>
             </div>
@@ -78,6 +79,90 @@
             menu.classList.toggle('is-active');
             menuLinks.classList.toggle('active');
         });
+    </script>
+    <script>
+    (function(){
+      var key='cartItems';
+      function load(){try{return JSON.parse(localStorage.getItem(key)||'[]')}catch(e){return []}}
+      function save(l){localStorage.setItem(key,JSON.stringify(l))}
+      function format(n){return '$'+n.toLocaleString('es-AR')}
+      function ensureUI(){
+        if(document.getElementById('cartPanel')) return;
+        var nav=document.querySelector('.navbar');
+        var btn=document.createElement('button');
+        btn.className='cart-btn'; btn.id='cartToggle';
+        btn.innerHTML='Carrito <span id="cartCount" class="cart-count">0</span>';
+        if(nav){
+          var burger=document.getElementById('mobile-menu');
+          if(burger){ nav.insertBefore(btn, burger); } else { nav.appendChild(btn); }
+        }
+        var panel=document.createElement('div');
+        panel.className='cart-panel'; panel.id='cartPanel';
+        panel.innerHTML='<div class="cart-header"><div>Tu Carrito</div><button id="cartClose" class="cart-btn">Cerrar</button></div><div class="cart-items" id="cartItems"></div><div class="cart-footer"><div class="cart-total"><span>Total</span><span id="cartTotal">$0</span></div><button id="checkoutBtn" class="btn-buy">Finalizar por WhatsApp</button></div>';
+        document.body.appendChild(panel);
+      }
+      function total(){var t=0;load().forEach(function(p){t+=p.price*p.qty});return t}
+      function updateTotals(){var el=document.getElementById('cartTotal'); if(el) el.textContent=format(total())}
+      function updateBadge(){var el=document.getElementById('cartCount'); if(!el) return; var n=0; load().forEach(function(p){n+=p.qty}); el.textContent=n}
+      function render(){
+        var box=document.getElementById('cartItems'); if(!box) return;
+        var list=load(); box.innerHTML='';
+        if(!list.length){updateTotals(); updateBadge(); return}
+        list.forEach(function(p){
+          var row=document.createElement('div');
+          row.className='cart-item';
+          row.innerHTML='<div><div class="cart-item-title">'+p.name+'</div><div>'+format(p.price)+' x '+p.qty+'</div></div><div class="qty"><button data-act="dec" data-name="'+p.name+'">-</button><span>'+p.qty+'</span><button data-act="inc" data-name="'+p.name+'">+</button><button data-act="del" data-name="'+p.name+'">x</button></div>';
+          box.appendChild(row);
+        });
+        updateTotals(); updateBadge();
+      }
+      function addItem(prod){
+        var list=load(); var found=list.find(function(x){return x.name===prod.name});
+        if(found){found.qty+=prod.qty||1}else{list.push({name:prod.name,price:prod.price,img:prod.img||'',qty:prod.qty||1})}
+        save(list); render();
+      }
+      function changeQty(name,delta){
+        var list=load(); for(var i=0;i<list.length;i++){ if(list[i].name===name){ list[i].qty+=delta; if(list[i].qty<=0){list.splice(i,1)} break; } }
+        save(list); render();
+      }
+      function removeItem(name){ save(load().filter(function(p){return p.name!==name})); render(); }
+      function openCart(){var p=document.getElementById('cartPanel'); if(p) p.classList.add('open')}
+      function closeCart(){var p=document.getElementById('cartPanel'); if(p) p.classList.remove('open')}
+      function checkout(){
+        var list=load(); if(!list.length){openCart();return}
+        var lines=['Hola MotorSport! Quiero comprar estos productos:','']; 
+        list.forEach(function(p,i){lines.push((i+1)+') '+p.name+' x'+p.qty+' - '+format(p.price*p.qty))});
+        lines.push(''); lines.push('Total: '+format(total()));
+        var url='https://wa.me/5493624894294?text='+encodeURIComponent(lines.join('\n'));
+        window.open(url,'_blank');
+      }
+      document.addEventListener('click',function(e){
+        var t=e.target;
+        if(t.id==='cartToggle'){e.preventDefault();openCart();return}
+        if(t.id==='cartClose'){e.preventDefault();closeCart();return}
+        if(t.id==='checkoutBtn'){e.preventDefault();checkout();return}
+        if(t.dataset && t.dataset.act){
+          if(t.dataset.act==='inc') changeQty(t.dataset.name,1);
+          else if(t.dataset.act==='dec') changeQty(t.dataset.name,-1);
+          else if(t.dataset.act==='del') removeItem(t.dataset.name);
+        }
+      });
+      function addCurrentProductToCart(){
+        var nameEl=document.querySelector('.detail-info h1');
+        var priceEl=document.querySelector('.detail-info .price');
+        var imgEl=document.querySelector('.detail-image img');
+        var name=nameEl?nameEl.innerText.trim():'';
+        var priceText=priceEl?priceEl.innerText:'';
+        var price=parseInt((priceText||'').replace(/[^0-9]/g,''),10)||0;
+        var img=imgEl?imgEl.getAttribute('src')||'':'';
+        if(!name||!price) return;
+        addItem({name:name,price:price,img:img,qty:1}); openCart();
+      }
+      document.addEventListener('DOMContentLoaded',function(){
+        ensureUI(); render(); updateBadge();
+        var b=document.getElementById('addToCartBtn'); if(b){ b.addEventListener('click',function(ev){ev.preventDefault(); addCurrentProductToCart();}); }
+      });
+    })();
     </script>
 </body>
 </html>
