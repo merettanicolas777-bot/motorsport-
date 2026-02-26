@@ -194,7 +194,7 @@ function filterProducts() {
         var lines=['Hola MotorSport! Quiero comprar estos productos:'];
         list.forEach(function(p,i){lines.push((i+1)+'. '+p.name+' x'+p.qty+' - '+format(p.price*p.qty))});
         lines.push('Total: '+format(total()));
-        var msg=lines.join('\n');
+        var msg=lines.join('\r\n');
         var url='https://wa.me/5493624894294?text='+encodeURIComponent(msg);
         location.href = url;
       }
