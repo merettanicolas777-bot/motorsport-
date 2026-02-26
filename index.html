@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MotorSport Resistencia | Equipamiento Automotor</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/scrollreveal"></script>
+</head>
+<body>
+
+    <nav class="navbar">
+    <div class="logo">
+        <a href="index.html">
+            <img src="WhatsApp Image 2026-01-12 at 2.02.56 PM.jpeg" alt="MotorSport Logo">
+        </a>
+    </div>
+
+    <div class="menu-toggle" id="mobile-menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </div>
+
+    <ul class="nav-links">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="catalogo.html">Catálogo</a></li>
+        <li><a href="nosotros.html">Nosotros</a></li>
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MotorSport Resistencia | Equipamiento Automotor</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/scrollreveal"></script>
+</head>
+    </ul>
+</nav>
+
+<script>
+    const menu = document.querySelector('#mobile-menu');
+    const menuLinks = document.querySelector('.nav-links');
+
+    menu.addEventListener('click', function() {
+        menu.classList.toggle('is-active');
+        menuLinks.classList.toggle('active');
+    });
+</script>
+
+    <header id="inicio" class="hero">
+        <div class="hero-content">
+            <h1 class="reveal">Lleva tu auto al <span class="highlight">siguiente nivel</span></h1>
+            <p class="reveal">Alfombras personalizadas, accesorios premium y estética vehicular en Resistencia.</p>
+            <a href="catalogo.html" class="btn-primary">Ver Productos</a>
+        </div>
+    </header>
+
+    <section id="catalogo" class="catalog-section">
+        <h2 class="section-title">NUESTRO CATÁLOGO</h2>
+        
+        <div class="product-grid" id="product-container">
+    <div class="product-card">
+        <a href="producto-zcut.html" style="display: block; cursor: pointer;">
+            <div class="product-img" style="background-image: url('zcut.jpg');"></div>
+        </a>
+        <div class="product-info">
+            <h3>Zacs Z Cut Fast (1L)</h3>
+            <span class="price">$38.500</span>
+            <a href="producto-zcut.html" class="btn-buy" style="display: block; text-align: center; text-decoration: none;">
+                VER DETALLES
+            </a>
+        </div>
+    </div>
+
+    <div class="product-card">
+        <a href="producto-cherry.html" style="display: block; cursor: pointer;">
+            <div class="product-img" style="background-image: url('cherry.jpg');"></div>
+        </a>
+        <div class="product-info">
+            <h3>Zacs Cherry Wax 4en1</h3>
+            <span class="price">$32.500</span>
+            <a href="producto-cherry.html" class="btn-buy" style="display: block; text-align: center; text-decoration: none;">
+                VER DETALLES
+            </a>
+        </div>
+    </div>
+</div>
+    </section>
+
+    
+
+    <script>
+        ScrollReveal().reveal('.reveal', { delay: 300, distance: '50px', origin: 'bottom' });
+        ScrollReveal().reveal('.product-card', { interval: 200 });
+    </script>
+</body>
+</html>

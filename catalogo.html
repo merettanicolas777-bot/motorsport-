@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo | MotorSport Resistencia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html">
+                <img src="WhatsApp Image 2026-01-12 at 2.02.56 PM.jpeg" alt="MotorSport Logo">
+            </a>
+        </div>
+
+        <div class="menu-toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="catalogo.html" style="color: var(--rojo);">Catálogo</a></li>
+            <li><a href="nosotros.html">Nosotros</a></li>
+        </ul>
+    </nav>
+
+    
+
+        <section class="container catalog-section">
+    <h2 class="section-title">Nuestros Productos</h2>
+
+    <div class="search-container">
+        <input type="text" id="product-search" placeholder="Buscar productos (ej. Cherry, Cut, Zacs...)" onkeyup="filterProducts()">
+        <span class="search-icon">🔍</span>
+    </div>
+
+    <div class="product-grid" id="product-container-dynamic"></div>
+
+    <!-- Modal de alta de producto -->
+    <div class="modal-overlay" id="addProductModal">
+        <div class="modal">
+            <h3>Agregar producto</h3>
+            <div class="form-row">
+                <div>
+                    <label>Nombre del producto</label>
+                    <input type="text" id="prodName" placeholder="Ej. Zacs Ultra Finish" />
+                </div>
+                <div>
+                    <label>Precio</label>
+                    <input type="text" id="prodPrice" placeholder="Ej. $45.000" />
+                </div>
+            </div>
+            <label>Descripción</label>
+            <textarea id="prodDesc" placeholder="Descripción breve del producto"></textarea>
+
+            <div class="form-row">
+                <div>
+                    <label>Foto (URL)</label>
+                    <input type="url" id="prodImgUrl" placeholder="https://..." />
+                </div>
+                <div>
+                    <label>Foto (Archivo)</label>
+                    <input type="file" id="prodImgFile" accept="image/*" />
+                </div>
+            </div>
+            <div class="img-preview" id="imgPreview"></div>
+
+            <label>Mensaje para WhatsApp</label>
+            <input type="text" id="prodWaMsg" placeholder="Hola MotorSport! Me interesa este producto..." />
+
+            <div class="actions">
+                <button class="btn" onclick="closeAddModal()">Cancelar</button>
+                <button class="btn btn-primary" onclick="submitProduct()">Agregar</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+function filterProducts() {
+    let input = document.getElementById('product-search').value.toLowerCase();
+    let cards = document.getElementsByClassName('product-card');
+
+    for (let i = 0; i < cards.length; i++) {
+        let title = cards[i].querySelector('h3').innerText.toLowerCase();
+        if (title.includes(input)) {
+            cards[i].style.display = "";
+            cards[i].style.animation = "fadeInUp 0.5s ease forwards";
+        } else {
+            cards[i].style.display = "none";
+        }
+    }
+}
+</script>
+
+    <script>
+        const menu = document.querySelector('#mobile-menu');
+        const menuLinks = document.querySelector('.nav-links');
+
+        menu.addEventListener('click', function() {
+            menu.classList.toggle('is-active');
+            menuLinks.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
+  <section class="container">
+        <div class="product-grid" id="product-container">
+    <div class="product-card">
+        <a href="producto-zcut.html" style="display: block; cursor: pointer;">
+            <div class="product-img" style="background-image: url('zcut.jpg');"></div>
+        </a>
+        <div class="product-info">
+            <h3>Zacs Z Cut Fast (1L)</h3>
+            <span class="price">$38.500</span>
+            <a href="producto-zcut.html" class="btn-buy" style="display: block; text-align: center; text-decoration: none;">
+                VER DETALLES
+            </a>
+        </div>
+    </div>
+
+    <div class="product-card">
+        <a href="producto-cherry.html" style="display: block; cursor: pointer;">
+            <div class="product-img" style="background-image: url('cherry.jpg');"></div>
+        </a>
+        <div class="product-info">
+            <h3>Zacs Cherry Wax 4en1</h3>
+            <span class="price">$32.500</span>
+            <a href="producto-cherry.html" class="btn-buy" style="display: block; text-align: center; text-decoration: none;">
+                VER DETALLES
+            </a>
+
+            
+        </div>
+      </div>
+      <div class="product-card">
+        <a href="cera.html" style="display: block; cursor: pointer;">
+            <div class="product-img" style="background-image: url('img/d0d3981f-6393-4c05-b743-b88d5f926af4.jpg');"></div>
+        </a>
+        <div class="product-info">
+            <h3>Cera BLEND Paste Wax</h3>
+            <span class="price">$51.500</span>
+            <a href="cera.html" class="btn-buy" style="display: block; text-align: center; text-decoration: none;">
+                VER DETALLES
+            </a>
+    </div>
+
+
+        
+    </div>
+    <div class="product-card">
+        <a href="cera.html" style="display: block; cursor: pointer;">
+            <div class="product-img" style="background-image: url('img/cc0043ac-223f-4df5-b6d7-978061de47e0.jpg');"></div>
+        </a>
+        <div class="product-info">
+            <h3>Cera BLEND Black Wax</h3>
+            <span class="price">$55.930</span>
+            <a href="cera2.html" class="btn-buy" style="display: block; text-align: center; text-decoration: none;">
+                VER DETALLES
+            </a>
+    </div>
+
+    </div>
+    <div class="product-card">
+        <a href="cera.html" style="display: block; cursor: pointer;">
+            <div class="product-img" style="background-image: url('img/d0d3981f-6393-4c05-b743-b88d5f926af4.jpg');"></div>
+        </a>
+        <div class="product-info">
+            <h3>Cera BLEND Paste Wax</h3>
+            <span class="price">$32.500</span>
+            <a href="cera.html" class="btn-buy" style="display: block; text-align: center; text-decoration: none;">
+                VER DETALLES
+            </a>
+    </div>
+
+    </div>
+    <div class="product-card">
+        <a href="cera.html" style="display: block; cursor: pointer;">
+            <div class="product-img" style="background-image: url('img/d0d3981f-6393-4c05-b743-b88d5f926af4.jpg');"></div>
+        </a>
+        <div class="product-info">
+            <h3>Cera BLEND Paste Wax</h3>
+            <span class="price">$32.500</span>
+            <a href="cera.html" class="btn-buy" style="display: block; text-align: center; text-decoration: none;">
+                VER DETALLES
+            </a>
+    </div>
+
+
+    </div>
+    <div class="product-card">
+        <a href="cera.html" style="display: block; cursor: pointer;">
+            <div class="product-img" style="background-image: url('img/d0d3981f-6393-4c05-b743-b88d5f926af4.jpg');"></div>
+        </a>
+        <div class="product-info">
+            <h3>Cera BLEND Paste Wax</h3>
+            <span class="price">$32.500</span>
+            <a href="cera.html" class="btn-buy" style="display: block; text-align: center; text-decoration: none;">
+                VER DETALLES
+            </a>
+    </div>
+
+
+    </div>
+    <div class="product-card">
+        <a href="cera.html" style="display: block; cursor: pointer;">
+            <div class="product-img" style="background-image: url('img/d0d3981f-6393-4c05-b743-b88d5f926af4.jpg');"></div>
+        </a>
+        <div class="product-info">
+            <h3>Cera BLEND Paste Wax</h3>
+            <span class="price">$32.500</span>
+            <a href="cera.html" class="btn-buy" style="display: block; text-align: center; text-decoration: none;">
+                VER DETALLES
+            </a>
+    </div>
+
+
+
+
+
+</section>
+
+</body>
+</html>

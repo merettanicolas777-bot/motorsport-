@@ -1,0 +1,733 @@
+:root {
+    --negro: #0a0a0a;
+    --rojo: #e60000;
+    --blanco: #ffffff;
+    --gris: #1a1a1a;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--negro);
+    color: var(--blanco);
+    margin: 0;
+    scroll-behavior: smooth;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 10%;
+    background: rgba(0,0,0,0.9);
+    position: fixed;
+    width: 80%;
+    z-index: 1000;
+    border-bottom: 2px solid var(--rojo);
+}
+
+.logo { font-weight: bold; font-style: italic; font-size: 1.5rem; }
+.logo span { color: var(--rojo); }
+
+.nav-links { list-style: none; display: flex; gap: 20px; }
+.nav-links a { color: white; text-decoration: none; transition: 0.3s; }
+.nav-links a:hover { color: var(--rojo); }
+
+/* Hero Section */
+.hero {
+    height: 100vh;
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1920&q=80');
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.highlight { color: var(--rojo); text-transform: uppercase; }
+
+.btn-primary {
+    padding: 15px 30px;
+    background: var(--rojo);
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: transform 0.3s;
+    display: inline-block;
+}
+
+.btn-primary:hover { transform: scale(1.1); box-shadow: 0 0 20px var(--rojo); }
+
+/* Catálogo */
+.catalog-section { padding: 40px 10%; }
+.section-title { border-left: 5px solid var(--rojo); padding-left: 15px; margin-bottom: 50px; }
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.product-card {
+    background: var(--gris);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: 0.4s;
+    border: 1px solid #333;
+}
+
+.product-card:hover { border-color: var(--rojo); transform: translateY(-10px); }
+
+.product-img { height: 200px; background-size: cover; background-position: center; }
+
+.product-info { padding: 20px; }
+.price { display: block; color: var(--rojo); font-size: 1.2rem; font-weight: bold; margin: 10px 0; }
+
+.btn-buy {
+    width: 100%;
+    padding: 10px;
+    background: transparent;
+    border: 1px solid var(--rojo);
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-buy:hover { background: var(--rojo); }
+
+/* Importar fuentes de Google */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Orbitron:wght@700&display=swap');
+
+:root {
+    --negro: #0a0a0a;
+    --rojo: #e60000;
+    --blanco: #ffffff;
+    --gris: #1a1a1a;
+    --font-main: 'Inter', sans-serif;
+    --font-accent: 'Orbitron', sans-serif;
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--negro);
+    color: var(--blanco);
+    margin: 0;
+    overflow-x: hidden;
+}
+
+/* Animación de entrada suave */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.section-title {
+    font-family: var(--font-accent);
+    letter-spacing: 2px;
+    border-left: 5px solid var(--rojo);
+    padding-left: 15px;
+    margin-bottom: 50px;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+/* Navbar Mejorada */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 10%;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px); /* Efecto moderno de desenfoque */
+    position: fixed;
+    width: 80%;
+    z-index: 1000;
+    border-bottom: 2px solid var(--rojo);
+}
+
+.logo { font-family: var(--font-accent); font-style: italic; font-size: 1.5rem; }
+
+/* Nuevo diseño para Nosotros */
+.about-container {
+    padding: 120px 10%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.about-img-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(230, 0, 0, 0.3);
+}
+
+.about-img {
+    width: 100%;
+    transition: transform 0.8s ease;
+}
+
+.about-img-container:hover .about-img {
+    transform: scale(1.1);
+}
+
+.about-text h2 {
+    font-size: 2.5rem;
+    color: var(--rojo);
+    margin-bottom: 20px;
+}
+
+.about-text p {
+    line-height: 1.8;
+    font-size: 1.1rem;
+    color: #ccc;
+}
+
+/* Variables y Fuentes Actualizadas */
+:root {
+    --negro: #0a0a0a;
+    --rojo: #e60000;
+    --blanco: #ffffff;
+    --gris: #1a1a1a;
+    --font-main: 'Inter', sans-serif;
+    --font-accent: 'Orbitron', sans-serif;
+}
+
+body {
+    font-family: var(--font-main); /* Mejora de legibilidad */
+}
+
+/* Sección Sobre Nosotros Mejorada */
+.about-section {
+    padding: 120px 10% 80px;
+    background: linear-gradient(180deg, var(--negro) 0%, #151515 100%);
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.section-title {
+    font-family: var(--font-accent);
+    font-size: 2.5rem;
+    color: var(--blanco);
+    border-left: 6px solid var(--rojo);
+    padding-left: 20px;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+}
+
+.about-content p {
+    line-height: 1.8;
+    color: #ccc;
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+}
+
+/* Estadísticas rápidas */
+.about-stats {
+    display: flex;
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.stat-number {
+    display: block;
+    font-family: var(--font-accent);
+    font-size: 1.8rem;
+    color: var(--rojo);
+}
+
+.stat-desc {
+    font-size: 0.85rem;
+    color: #888;
+    text-transform: uppercase;
+}
+
+/* Efectos de Imagen */
+.image-wrapper {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(230, 0, 0, 0.2);
+}
+
+.about-img {
+    width: 100%;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.image-wrapper:hover .about-img {
+    transform: scale(1.08); /* Animación de zoom suave sin JS */
+}
+
+/* Animación de entrada suave */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+    animation: fadeInUp 1s ease forwards;
+}
+
+/* Responsivo para móviles */
+@media (max-width: 768px) {
+    .about-grid { grid-template-columns: 1fr; text-align: center; }
+    .section-title { border-left: none; border-bottom: 4px solid var(--rojo); padding: 0 0 10px; }
+    .about-stats { justify-content: center; }
+}
+
+/* --- Ajustes del Logo --- */
+.logo img {
+    height:100px; /* Ajusta el tamaño según prefieras */
+    width: 160px;
+    display: block;
+}
+
+/* --- Menu Hamburguesa (Oculto por defecto en PC) --- */
+.menu-toggle {
+    display: none;
+    cursor: pointer;
+}
+
+.menu-toggle .bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    background-color: var(--blanco);
+    transition: all 0.3s ease-in-out;
+}
+
+/* --- Responsivo: Solo para Celulares (max-width: 768px) --- */
+@media (max-width: 768px) {
+    .navbar {
+        width: 90%; /* Más espacio en móviles */
+        padding: 15px 5%;
+    }
+
+    .menu-toggle {
+        display: block; /* Aparece en celular */
+        z-index: 1001;
+    }
+
+    /* Animación X al abrir el menú */
+    .menu-toggle.is-active .bar:nth-child(2) { opacity: 0; }
+    .menu-toggle.is-active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .menu-toggle.is-active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%; /* Escondido a la derecha */
+        width: 70%;
+        height: 100vh;
+        background: rgba(10, 10, 10, 0.98);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: 0.5s all ease;
+        border-left: 2px solid var(--rojo);
+    }
+
+    .nav-links.active {
+        right: 0; /* Desliza hacia adentro */
+    }
+
+    .nav-links li {
+        margin: 20px 0;
+    }
+
+    .nav-links a {
+        font-size: 1.5rem;
+        font-family: var(--font-accent);
+    }
+}
+
+/* --- Actualización de la Navbar --- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Alinea verticalmente logo y links */
+    padding: 10px 10%; /* Reducido un poco para que no ocupe tanto espacio */
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 80%; /* Si usas 80%, asegúrate de centrarla o usa 100% y padding */
+    z-index: 1000;
+    border-bottom: 2px solid var(--rojo);
+}
+
+.nav-links {
+    color: white;
+    text-decoration: none;
+    transition: 0.3s;
+    /* Aplicamos la misma fuente que en los títulos de Sobre Nosotros */
+    font-family: var(--font-accent); 
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    transition: 0.3s;
+    /* Aplicamos la misma fuente que en los títulos de Sobre Nosotros */
+    font-family: var(--font-accent); 
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.nav-links a:hover {
+    color: var(--rojo);
+}
+
+/* Ajuste para que el contenido no quede debajo de la navbar fija */
+.container, .catalog-section, .about-section {
+    margin-top: 80px; 
+}
+
+/* --- Asegúrate de que las fuentes estén definidas arriba en tu CSS --- */
+:root {
+    --negro: #0a0a0a;
+    --rojo: #e60000;
+    --blanco: #ffffff;
+    --gris: #1a1a1a;
+    --font-main: 'Inter', sans-serif;
+    --font-accent: 'Orbitron', sans-serif;
+}
+
+/* Hero Section Corregida */
+.hero {
+    /* Usamos min-height para evitar problemas de corte en celulares */
+    min-height: 100vh;
+    /* Cambiamos la URL por una más compatible o la tuya local */
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1920&q=80');
+    
+    background-size: cover;
+    background-position: center center; /* Centra la imagen siempre */
+    background-repeat: no-repeat;
+    background-attachment: scroll; /* Cambiado de fixed a scroll para móviles */
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 20px;
+}
+
+/* Ajuste específico para pantallas pequeñas */
+@media (max-width: 768px) {
+    .hero {
+        /* En algunos celulares 100vh da problemas, 100svh es la medida moderna */
+        height: 100svh; 
+        background-attachment: scroll; /* Obligatorio para que aparezca en iPhone/Android */
+    }
+    
+    .hero-content h1 {
+        font-size: 1.8rem; /* Achicamos un poco el texto para que entre bien */
+    }
+}
+
+.btn-buy {
+    width: 100%;
+    padding: 12px 0; /* Un poco más de espacio vertical */
+    background: transparent;
+    border: 1px solid var(--rojo);
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+    font-family: var(--font-accent); /* Usamos la fuente deportiva */
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    
+    /* Asegura que el enlace se comporte como un botón sólido */
+    display: block; 
+    box-sizing: border-box; 
+}
+
+.btn-buy:hover {
+    background: var(--rojo);
+    box-shadow: 0 0 15px var(--rojo); /* Efecto de brillo al pasar el mouse */
+}
+
+/* --- Estilos para Página de Producto Individual --- */
+.product-detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.detail-image img {
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid #333;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+/* En celulares, poner una columna debajo de la otra */
+@media (max-width: 768px) {
+    .product-detail-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+}
+
+.product-card .product-img {
+    transition: transform 0.5s ease; /* Suaviza el zoom */
+}
+
+/* Efecto visual al pasar el mouse sobre la imagen */
+.product-card a:hover .product-img {
+    transform: scale(1.05);
+    filter: brightness(1.1); /* Le da un poco más de luz al tocarla */
+}
+
+/* Evita que el enlace de la imagen tenga bordes extraños */
+.product-card a {
+    text-decoration: none;
+    overflow: hidden; /* Mantiene el zoom dentro de la tarjeta */
+    display: block;
+}
+
+/* Ajuste de la Grilla */
+.product-grid {
+    display: grid;
+    /* Cambiamos el minmax para que no intenten estirarse tanto */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 350px)); 
+    gap: 40px;
+    justify-content: center; /* Centra las tarjetas si sobran espacios a los lados */
+    padding: 20px 0;
+}
+
+/* Ajuste de la Tarjeta */
+.product-card {
+    background: var(--gris);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: 0.4s;
+    border: 1px solid #333;
+    max-width: 350px; /* Evita que la tarjeta crezca de más */
+    margin: 0 auto;  /* Asegura que esté centrada en su celda */
+}
+
+.product-img {
+    height: 300px; /* Aumentamos un poco el alto para que se vea más vertical y esbelta */
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.5s ease;
+}
+
+.search-container {
+    position: relative;
+    max-width: 500px;
+    margin: 0 auto 8px auto; /* Más pegado a la barra de búsqueda */
+}
+
+#product-search {
+    width: 100%;
+    padding: 15px 20px;
+    background: var(--gris);
+    border: 2px solid #333;
+    border-radius: 30px;
+    color: white;
+    font-family: var(--font-main);
+    font-size: 1rem;
+    outline: none;
+    transition: 0.3s;
+}
+
+#product-search:focus {
+    border-color: var(--rojo);
+    box-shadow: 0 0 15px rgba(230, 0, 0, 0.2);
+}
+
+.search-icon {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+    pointer-events: none;
+}
+
+/* --- UI de alta de productos --- */
+.admin-add-btn {
+    display: inline-block;
+    margin: 20px 0;
+    padding: 10px 16px;
+    background: transparent;
+    border: 1px solid var(--rojo);
+    color: #fff;
+    font-family: var(--font-accent);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.admin-add-btn:hover { background: var(--rojo); box-shadow: 0 0 15px var(--rojo); }
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+.modal {
+    width: 90%;
+    max-width: 600px;
+    background: #141414;
+    border: 1px solid #333;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    padding: 20px;
+}
+.modal h3 {
+    margin-top: 0;
+    font-family: var(--font-accent);
+    color: var(--rojo);
+}
+.modal .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+.modal label {
+    display: block;
+    font-size: 0.9rem;
+    color: #bbb;
+    margin-bottom: 6px;
+}
+.modal input[type="text"],
+.modal input[type="number"],
+.modal input[type="url"],
+.modal textarea {
+    width: 100%;
+    padding: 10px 12px;
+    background: var(--gris);
+    border: 1px solid #333;
+    border-radius: 8px;
+    color: #fff;
+    outline: none;
+    box-sizing: border-box;
+}
+.modal textarea { min-height: 90px; resize: vertical; }
+.modal .actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    margin-top: 16px;
+}
+.modal .btn {
+    padding: 10px 16px;
+    border: 1px solid #333;
+    background: #1c1c1c;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 8px;
+}
+.modal .btn-primary {
+    border-color: var(--rojo);
+    color: #fff;
+}
+.modal .btn-primary:hover { background: var(--rojo); }
+.img-preview {
+    margin-top: 10px;
+    width: 100%;
+    height: 180px;
+    background: #0f0f0f;
+    border: 1px dashed #444;
+    border-radius: 8px;
+    background-size: cover;
+    background-position: center;
+}
+
+@media (max-width: 768px) {
+    .modal .form-row { grid-template-columns: 1fr; }
+}
+
+/* Animación para cuando aparecen los productos al filtrar */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Configuración de Catálogo - 2 Columnas Global */
+.product-grid {
+    display: grid;
+    /* '1fr 1fr' obliga a que siempre sean 2 columnas de igual tamaño */
+    grid-template-columns: 1fr 1fr; 
+    gap: 20px; /* Reducimos el espacio entre tarjetas para que quepan bien en móvil */
+    justify-content: center;
+    padding: 0;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Ajuste de la Tarjeta */
+.product-card {
+    background: var(--gris);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: 0.4s;
+    border: 1px solid #333;
+    width: 100%; 
+}
+
+.product-img {
+    height: 200px; /* Bajamos la altura en general para que no ocupe toda la pantalla del cel */
+    background-size: cover;
+    background-position: center;
+}
+
+/* Ajustes específicos para Celular */
+@media (max-width: 768px) {
+    .product-grid {
+        gap: 10px; /* Espacio mínimo entre productos en móvil */
+        padding: 20px 10px;
+    }
+
+    .product-img {
+        height: 150px; /* Imagen más pequeña para que se vea el título y precio */
+    }
+
+    .product-info h3 {
+        font-size: 0.8rem; /* Fuente más chica para que no se corte el nombre */
+        margin-bottom: 5px;
+    }
+
+    .price {
+        font-size: 0.9rem;
+    }
+
+    .btn-buy {
+        font-size: 0.7rem;
+        padding: 8px 0;
+    }
+}
